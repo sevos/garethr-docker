@@ -11,7 +11,7 @@
 #
 class docker::install {
   include apt
-  validate_string($version)
+  validate_string($docker::version)
   validate_re($::osfamily, '^Debian$', 'This module uses PPA repos and only works with Debian based distros')
 
   apt::ppa { 'ppa:dotcloud/lxc-docker': }
