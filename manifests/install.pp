@@ -4,14 +4,9 @@
 # official PPA. The use of the PPA means this only works
 # on Ubuntu.
 #
-# === Parameters
-# [*version*]
-#   The package version to install, passed to ensure.
-#   Defaults to present.
-#
 class docker::install {
   include apt
-  validate_string($docker::version)
+  validate_string($docker::version_real)
   validate_re(
     $::osfamily,
     '^Debian$',
@@ -21,7 +16,7 @@ class docker::install {
   apt::ppa { 'ppa:dotcloud/lxc-docker': }
 
   package { 'lxc-docker':
-    ensure  => $docker::version,
+    ensure  => $docker::version_real,
     require => Apt::Ppa['ppa:dotcloud/lxc-docker'],
   }
 }

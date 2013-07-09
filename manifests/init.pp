@@ -9,11 +9,15 @@
 #   The package version to install, passed to ensure.
 #   Defaults to present.
 #
-class docker(
-  $version = $docker::params::version,
-) inherits docker::params {
+class docker($version = undef){
 
-  validate_string($version)
+  include docker::params
+  $version_real = $version ? {
+    undef   => $docker::params::version,
+    default => $version
+  }
+
+  validate_string($version_real)
   validate_re(
     $::osfamily,
     '^Debian$',
