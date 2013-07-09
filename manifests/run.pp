@@ -1,3 +1,4 @@
+# == Define: docker::run
 define docker::run(
   $image,
   $command,

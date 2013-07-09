@@ -1,3 +1,4 @@
+# == Define: docker::image
 define docker::image(
   $ensure = 'present',
   $image = $title,
